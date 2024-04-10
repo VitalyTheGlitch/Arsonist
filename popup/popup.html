@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARSONIST</title>
+    <link rel="stylesheet" href="./popup.css">
+</head>
+
+<body>
+    <header class="popup-header">
+        <div class="popup-title">
+            <h1>ARSONIST</h1>
+        </div>
+        <div id="popup-header-buttons">
+            <button id="adButton">Miner</button>
+        </div>
+    </header>
+    <section class="popup-body">
+        <div class="update-available" style="display: none; width: 200px;">
+            <h4>A new update is available</h4>
+            <p id="update-text"></p>
+            <button id="updateButton">Update</button>
+        </div>
+        <div class="update-check" style="display: none;">
+            <p>Checking for update...</p>
+        </div>
+        <div class="popup-ad-controls">
+            <h4>Miner</h4>
+            <p>Automatically watches ads and spins the gold wheel</p>
+            <button id="startButton">Start</button>
+            <button id="stopButton">Stop</button>
+        </div>
+    </section>
+    <footer class="popup-footer">
+        <h4>SOCIALS</h4>
+        <div class="popup-footer-socials">
+            <img id="youtube-icon" src="../images/popup/socials/youtube.svg" alt="YouTube">
+            <img id="discord-icon" src="../images/popup/socials/discord.svg" alt="Discord">
+        </div>
+        <h6>By Corruptor</h6>
+    </footer>
+    <script src="./popup.js"></script>
+    <script src="../contentscripts/notifications/notification.js" type="module"></script>
+</body>
+
+</html>
