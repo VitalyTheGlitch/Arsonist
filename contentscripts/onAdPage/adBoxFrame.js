@@ -1,5 +1,5 @@
-let restriction = 0x1e;
-let countdownInProgress = false;
+var restriction = 0x1e;
+var countdownInProgress = false;
 
 const elementSrcExists = _0x1889c4 => {
   try {
@@ -9,7 +9,7 @@ const elementSrcExists = _0x1889c4 => {
   } catch (e) {
     console.error('Error checking element source:', e);
 
-    Toast.showToast('error', 'Bot coundnt find the ad page');
+    Toast.showToast('error', 'Coundnt find the ad page');
   }
 };
 
