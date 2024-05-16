@@ -23,7 +23,7 @@ const elementExists = async _0x351f7a => {
   }
 };
 
-const activateMiner = async () => {
+const activateAssassin = async () => {
   isBotRunning = true;
 
   if (!elementSrcExists('wheel_of_fortune_arrow')) {
@@ -60,7 +60,7 @@ const activateMiner = async () => {
     await new Promise(_0x3eef8d => setTimeout(async () => {
       isBotRunning = false;
 
-      await activateMiner();
+      await activateAssassin();
 
       _0x3eef8d();
     }, 0x1388));
@@ -112,27 +112,27 @@ const activateMiner = async () => {
   roulleteTimeout = setTimeout(async () => {
     isBotRunning = false;
 
-    await activateMiner();
+    await activateAssassin();
   }, 0xbb8);
 };
 
 chrome.runtime.onMessage.addListener(async (_0x544831, _0x21362b, _0x58e093) => {
-  if ((await _0x544831.message) === 'startMiner') {
-    Toast.showToast('success', 'Miner activated');
+  if ((await _0x544831.message) === 'startAssassin') {
+    Toast.showToast('success', 'Assassin activated');
 
     if (isBotRunning) {
-      Toast.showToast('info', 'Miner is already running');
+      Toast.showToast('info', 'Assassin is already running');
 
       return;
     }
 
-    await activateMiner();
-  } else if ((await _0x544831.message) === 'stopMiner') {
+    await activateAssassin();
+  } else if ((await _0x544831.message) === 'stopAssassin') {
     clearTimeout(roulleteTimeout);
 
     isBotRunning = false;
 
-    Toast.showToast('info', 'Miner deactivated');
+    Toast.showToast('info', 'Assassin deactivated');
   } else if ((await _0x544831.message) === 'AdStarted1') {
     try {
       await _0x58e093({ 'status': 'success' });

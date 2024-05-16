@@ -36,9 +36,8 @@ button:hover {
   transition: transform 0.3s ease-in-out;
 }
 
-#adButton,
-#detButton,
-#customButton {
+#minerButton,
+#assassinButton {
   background-color: transparent;
   color: #ffffff;
   border: none;
@@ -50,9 +49,8 @@ button:hover {
   transition: border-bottom-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-#adButton:hover,
-#detButton:hover,
-#customButton:hover {
+#minerButton:hover,
+#assassinButton:hover {
   border-bottom-color: #ffffff;
 }
 
@@ -97,7 +95,12 @@ button:hover {
   padding: 20px;
 }
 
-.popup-ad-controls {
+.popup-miner-controls {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.popup-assassin-controls {
   max-width: 400px;
   margin: 0 auto;
 }
@@ -129,14 +132,15 @@ button:hover {
 }
 
 .popup-title h1,
-.popup-ad-controls,
+.popup-miner-controls,
+.popup-assassin-controls,
 .popup-footer-socials,
 .popup-footer h6 {
   animation: fadeIn 1s ease-out;
 }
 
 @media (max-width: 600px) {
-  .popup-ad-controls {
+  .popup-miner-controls {
     max-width: 100%;
   }
 

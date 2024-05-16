@@ -15,7 +15,7 @@ const showNotification = async (_0x1f1bb9, _0x471745='basic', _0x50f519, _0x5a2b
 };
 
 chrome.runtime.onMessage.addListener(async(_0x44b719, _0x33b6cd, _0x2abe2a) => {
-  if (_0x44b719.message === 'startAutoOnAdvertPage') await showNotification('TESTING_PHASE', 'basic', 'The bot is experimental, please report any bugs you find.', false);
+  if (_0x44b719.message in ['startMiner', 'startAssassin']) await showNotification('TESTING_PHASE', 'basic', 'The bot is experimental, please report any bugs you find.', false);
 
   else if (_0x44b719.message === 'AdStarted') {
     try {
@@ -24,9 +24,7 @@ chrome.runtime.onMessage.addListener(async(_0x44b719, _0x33b6cd, _0x2abe2a) => {
         'currentWindow': true
       });
 
-      await chrome.tabs.sendMessage(_0x58dc45.id, {
-        'message': 'AdStarted1'
-      });
+      await chrome.tabs.sendMessage(_0x58dc45.id, { 'message': 'AdStarted1' });
 
       if (_0x2abe2a) _0x2abe2a({ 'status': 'success' });
     } catch (e) {
