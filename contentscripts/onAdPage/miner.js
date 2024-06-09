@@ -1,11 +1,11 @@
 let isMinerRunning = false;
 let wheelTimeout;
 
-const elementSrcExists = _0x207ee2 => {
+const elementSrcExists = src => {
   try {
-    const _0x5cb41d = [...document.getElementsByTagName('*')].filter(_0x1b1ab1 => _0x1b1ab1.hasAttribute('src') && _0x1b1ab1.src.includes(_0x207ee2));
+    const result = [...document.getElementsByTagName('*')].filter(element => element.hasAttribute('src') && element.src.includes(src));
 
-    return _0x5cb41d.length > 0x0;
+    return result.length > 0;
   } catch (e) {
     console.error('Error checking element source:', e);
 
@@ -13,13 +13,13 @@ const elementSrcExists = _0x207ee2 => {
   }
 };
 
-const elementExists = async _0x351f7a => {
+const elementExists = async text => {
   try {
-    const _0x1da7ff = [...document.getElementsByTagName('*')].filter(_0x2d423f => _0x2d423f.textContent === _0x351f7a && !_0x2d423f.parentElement.querySelector('[role="progressbar"]'));
+    const result = [...document.getElementsByTagName('*')].filter(element => element.textContent === text && !element.parentElement.querySelector('[role="progressbar"]'));
 
-    return _0x1da7ff.length > 0x0 ? _0x1da7ff[_0x1da7ff.length - 0x1] : null;
+    return result.length > 0 ? result[result.length - 1] : null;
   } catch (e) {
-    console.error('Error finding element with text "' + _0x351f7a + '":', e);
+    console.error('Error finding element with text "' + text + '":', e);
   }
 };
 
@@ -34,9 +34,9 @@ const activateMiner = async () => {
     return;
   }
 
-  const _0x22e571 = await elementExists('Unable to load video ads. Please make sure you have a stable internet connection and no ad blockers are running.');
+  const unable = await elementExists('Unable to load video ads. Please make sure you have a stable internet connection and no ad blockers are running.');
 
-  if (_0x22e571) {
+  if (unable) {
     Toast.showToast('info', 'Couldnt load ads');
 
     isMinerRunning = false;
@@ -44,9 +44,9 @@ const activateMiner = async () => {
     return;
   }
 
-  const _0x18f143 = [...document.getElementsByTagName('*')].find(_0x366b9f => _0x366b9f.textContent.includes('New rewards will be available in'));
+  const done = [...document.getElementsByTagName('*')].find(element => element.textContent.includes('New rewards will be available in'));
 
-  if (_0x18f143) {
+  if (done) {
     Toast.showToast('info', 'Done');
 
     isMinerRunning = false;
@@ -57,35 +57,34 @@ const activateMiner = async () => {
   if ((await document.querySelector('#turnstile-widget')) !== null) {
     Toast.showToast('info', 'Cloudflare detected! Manually tick the box');
 
-    await new Promise(_0x3eef8d => setTimeout(async () => {
+    await new Promise(resolve => setTimeout(async () => {
       isMinerRunning = false;
 
       await activateMiner();
 
-      _0x3eef8d();
-    }, 0x1388));
+      resolve();
+    }, 5000));
 
     return;
   }
 
   try {
-    const _0x43ee82 = await elementExists('WATCH VIDEO');
+    const watch = await elementExists('WATCH VIDEO');
 
-    if (_0x43ee82) {
-      await new Promise(_0x302954 => setTimeout(() => {
-        _0x43ee82.click();
+    if (watch) {
+      await new Promise(resolve => setTimeout(() => {
+        watch.click();
 
-        _0x302954();
-      }, 0xbb8));
+        resolve();
+      }, 3000));
 
-      await new Promise(_0x25333c => setTimeout(() => {
+      await new Promise(resolve => setTimeout(() => {
         chrome.runtime.sendMessage({
           'message': 'AdStarted'
         });
 
-        _0x25333c();
-
-      }, 0xdac));
+        resolve();
+      }, 3500));
     }
   } catch (e) {
     console.error('Error clicking the ad button:', e);
@@ -94,14 +93,14 @@ const activateMiner = async () => {
   }
 
   try {
-    const _0x5ece9d = await elementExists('SPIN');
+    const spin = await elementExists('SPIN');
 
-    if (_0x5ece9d) {
-      await new Promise(_0x40c8fc => setTimeout(() => {
-        _0x5ece9d.click();
+    if (spin) {
+      await new Promise(resolve => setTimeout(() => {
+        spin.click();
 
-        _0x40c8fc();
-      }, 0xbb8));
+        resolve();
+      }, 3000));
     }
   } catch (e) {
     console.error('Error clicking the spin button:', e);
@@ -113,11 +112,11 @@ const activateMiner = async () => {
     isMinerRunning = false;
 
     await activateMiner();
-  }, 0xbb8);
+  }, 3000);
 };
 
-chrome.runtime.onMessage.addListener(async (_0x544831, _0x21362b, _0x58e093) => {
-  if ((await _0x544831.message) === 'startMiner') {
+chrome.runtime.onMessage.addListener(async (event, _, callback) => {
+  if ((await event.message) === 'startMiner') {
     Toast.showToast('success', 'Miner activated');
 
     if (isMinerRunning) {
@@ -127,19 +126,19 @@ chrome.runtime.onMessage.addListener(async (_0x544831, _0x21362b, _0x58e093) => 
     }
 
     await activateMiner();
-  } else if ((await _0x544831.message) === 'stopMiner') {
+  } else if ((await event.message) === 'stopMiner') {
     clearTimeout(wheelTimeout);
 
     isMinerRunning = false;
 
     Toast.showToast('info', 'Miner deactivated');
-  } else if ((await _0x544831.message) === 'AdStarted1') {
+  } else if ((await event.message) === 'AdStarted1') {
     try {
-      await _0x58e093({ 'status': 'success' });
+      await callback({ 'status': 'success' });
     } catch (e) {
       console.error('Error handling AdStarted message in miner.js:', e);
 
-      await _0x58e093({ 'status': 'error' });
+      await callback({ 'status': 'error' });
     }
   }
 

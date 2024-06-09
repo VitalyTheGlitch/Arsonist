@@ -11,7 +11,7 @@ class Toast {
 		Toast.toastbox = element;
 	}
 
-	static showToast(type, content) {
+	static showToast(status, content) {
 		try {
 			if (!Toast.toastbox) Toast.createToastBox();
 
@@ -20,7 +20,7 @@ class Toast {
 			element.classList.add('toast');
 			element.innerHTML = '<i class="fa-solid fa-circle-info"></i><span>' + content + '</span>';
 
-			switch (type) {
+			switch (status) {
 				case 'success':
 					element.classList.add('success');
           

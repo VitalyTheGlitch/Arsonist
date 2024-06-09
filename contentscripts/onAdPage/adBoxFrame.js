@@ -1,11 +1,11 @@
-var restriction = 0x1e;
+var restriction = 30;
 var countdownInProgress = false;
 
-const elementSrcExists = _0x1889c4 => {
+const elementSrcExists = src => {
   try {
-    const _0x16e20d = [...document.getElementsByTagName('*')].filter(_0x43317b => _0x43317b.hasAttribute('src') && _0x43317b.src.includes(_0x1889c4));
+    const result = [...document.getElementsByTagName('*')].filter(element => element.hasAttribute('src') && element.src.includes(src));
 
-    return _0x16e20d.length > 0x0 ? _0x16e20d[_0x16e20d.length - 0x1] : null;
+    return result.length > 0 ? result[result.length - 1] : null;
   } catch (e) {
     console.error('Error checking element source:', e);
 
@@ -13,16 +13,16 @@ const elementSrcExists = _0x1889c4 => {
   }
 };
 
-const clickElementIfExists = async (_0x488742, _0x59512b) => {
-  if (_0x488742) {
+const clickElementIfExists = async (element, text) => {
+  if (element) {
     try {
-      _0x488742.click();
+      element.click();
 
-      Toast.showToast('success', _0x59512b + ' clicked');
+      Toast.showToast('success', text + ' clicked');
     } catch (e) {
-      console.error('Error clicking ' + _0x59512b + ':', e);
+      console.error('Error clicking ' + text + ':', e);
 
-      Toast.showToast('error', 'Coundnt click ' + _0x59512b);
+      Toast.showToast('error', 'Coundnt click ' + text);
     }
   }
 };
@@ -30,36 +30,36 @@ const clickElementIfExists = async (_0x488742, _0x59512b) => {
 const adTask = async () => {
   if (!countdownInProgress) {
     try {
-      const _0x504d3d = document.querySelector('#ad_position_box');
-      const _0x5aa944 = document.querySelector('#dismiss-button-element');
+      const outside = document.querySelector('#ad_position_box');
+      const dimiss = document.querySelector('#dismiss-button-element');
 
-      if (_0x504d3d && _0x5aa944) {
-        const _0x32b2c9 = document.querySelector('#count-down-text').textContent;
+      if (outside && dimiss) {
+        const countdown = document.querySelector('#count-down-text').textContent;
 
-        if (_0x32b2c9 === 'Reward in 1 seconds') {
+        if (countdown === 'Reward in 1 seconds') {
           countdownInProgress = true;
 
           Toast.showToast('info', 'Waiting ' + restriction + ' seconds before closing the ad');
 
-          const _0x521125 = setInterval(() => {
-            restriction -= 0xa;
+          const task = setInterval(() => {
+            restriction -= 10;
 
             Toast.showToast('info', 'Waiting ' + restriction + ' seconds before closing the ad');
-          }, 0x2710);
+          }, 10000);
 
-        	await new Promise(_0x48af32 => setTimeout(async () => {
-            clearInterval(_0x521125);
+        	await new Promise(resolve => setTimeout(async () => {
+            clearInterval(task);
 
             countdownInProgress = false;
 
             await clickElementIfExists(elementSrcExists('https://www.gstatic.com/dfp/native/play.png'), 'Play');
-            await clickElementIfExists(_0x504d3d, 'Outside');
-            await clickElementIfExists(_0x5aa944, 'Dismiss');
+            await clickElementIfExists(outside, 'Outside');
+            await clickElementIfExists(dimiss, 'Dismiss');
 
-            restriction = 0x1e;
+            restriction = 30;
 
-            _0x48af32();
-          }, restriction * 0x3e8));
+            resolve();
+          }, restriction * 1000));
         }
       }
     } catch (e) {
@@ -70,4 +70,4 @@ const adTask = async () => {
   }
 };
 
-setInterval(adTask, 0x3e8);
+setInterval(adTask, 1000);
