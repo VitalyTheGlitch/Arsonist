@@ -1,5 +1,5 @@
-let isBotRunning = false;
-let roulleteTimeout;
+let isMinerRunning = false;
+let wheelTimeout;
 
 const elementSrcExists = _0x207ee2 => {
   try {
@@ -24,12 +24,12 @@ const elementExists = async _0x351f7a => {
 };
 
 const activateMiner = async () => {
-  isBotRunning = true;
+  isMinerRunning = true;
 
   if (!elementSrcExists('wheel_of_fortune_arrow')) {
     Toast.showToast('info', 'Go to the gold wheel');
 
-    isBotRunning = false;
+    isMinerRunning = false;
 
     return;
   }
@@ -39,7 +39,7 @@ const activateMiner = async () => {
   if (_0x22e571) {
     Toast.showToast('info', 'Couldnt load ads');
 
-    isBotRunning = false;
+    isMinerRunning = false;
 
     return;
   }
@@ -49,7 +49,7 @@ const activateMiner = async () => {
   if (_0x18f143) {
     Toast.showToast('info', 'Done');
 
-    isBotRunning = false;
+    isMinerRunning = false;
 
     return;
   }
@@ -58,7 +58,7 @@ const activateMiner = async () => {
     Toast.showToast('info', 'Cloudflare detected! Manually tick the box');
 
     await new Promise(_0x3eef8d => setTimeout(async () => {
-      isBotRunning = false;
+      isMinerRunning = false;
 
       await activateMiner();
 
@@ -109,8 +109,8 @@ const activateMiner = async () => {
     Toast.showToast('error', 'Couldnt click the spin button');
   }
 
-  roulleteTimeout = setTimeout(async () => {
-    isBotRunning = false;
+  wheelTimeout = setTimeout(async () => {
+    isMinerRunning = false;
 
     await activateMiner();
   }, 0xbb8);
@@ -120,7 +120,7 @@ chrome.runtime.onMessage.addListener(async (_0x544831, _0x21362b, _0x58e093) => 
   if ((await _0x544831.message) === 'startMiner') {
     Toast.showToast('success', 'Miner activated');
 
-    if (isBotRunning) {
+    if (isMinerRunning) {
       Toast.showToast('info', 'Miner is already running');
 
       return;
@@ -128,9 +128,9 @@ chrome.runtime.onMessage.addListener(async (_0x544831, _0x21362b, _0x58e093) => 
 
     await activateMiner();
   } else if ((await _0x544831.message) === 'stopMiner') {
-    clearTimeout(roulleteTimeout);
+    clearTimeout(wheelTimeout);
 
-    isBotRunning = false;
+    isMinerRunning = false;
 
     Toast.showToast('info', 'Miner deactivated');
   } else if ((await _0x544831.message) === 'AdStarted1') {

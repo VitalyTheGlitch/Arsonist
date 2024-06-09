@@ -2,35 +2,37 @@ class Toast {
 	static toastbox;
 
 	static createToastBox() {
-		const _0x22671c = document.createElement('div');
-		_0x22671c.classList.add('toastbox');
+		const element = document.createElement('div');
 
-		document.body.appendChild(_0x22671c);
-		Toast.toastbox = _0x22671c;
+		element.classList.add('toastbox');
+
+		document.body.appendChild(element);
+
+		Toast.toastbox = element;
 	}
 
-	static showToast(_0x224acf, _0x94c0e2) {
+	static showToast(type, content) {
 		try {
 			if (!Toast.toastbox) Toast.createToastBox();
 
-			const _0x2cd3a8 = document.createElement('div');
+			const element = document.createElement('div');
 
-			_0x2cd3a8.classList.add('toast');
-			_0x2cd3a8.innerHTML = '<i class="fa-solid fa-circle-info"></i><span>' + _0x94c0e2 + '</span>';
+			element.classList.add('toast');
+			element.innerHTML = '<i class="fa-solid fa-circle-info"></i><span>' + content + '</span>';
 
-			switch (_0x224acf) {
+			switch (type) {
 				case 'success':
-					_0x2cd3a8.classList.add('success');
+					element.classList.add('success');
           
 					break;
 
 				case 'info':
-					_0x2cd3a8.classList.add('info');
+					element.classList.add('info');
 
 					break;
 
 				case 'error':
-					_0x2cd3a8.classList.add('error');
+					element.classList.add('error');
 
 					break;
 
@@ -38,15 +40,13 @@ class Toast {
 					break;
 			}
 
-			Toast.toastbox.appendChild(_0x2cd3a8);
+			Toast.toastbox.appendChild(element);
 
 			setTimeout(() => {
-				_0x2cd3a8.classList.add('out');
+				element.classList.add('out');
 
-				setTimeout(() => {
-					_0x2cd3a8.remove();
-				}, 0x1f4);
-			}, 0x2710);
+				setTimeout(() => element.remove(), 500);
+			}, 10000);
 		} catch (e) {
 			console.error('Toast error:', e);
 		}

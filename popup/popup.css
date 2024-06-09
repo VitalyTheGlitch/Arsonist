@@ -101,6 +101,7 @@ button:hover {
 }
 
 .popup-assassin-controls {
+  display: none;
   max-width: 400px;
   margin: 0 auto;
 }
