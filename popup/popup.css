@@ -6,8 +6,8 @@
 
 body {
   width: 200px;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #f5f3f3;
+  color: #000;
   font-family: 'Trebuchet MS', sans-serif;
 }
 
@@ -22,8 +22,9 @@ input[type='radio'] {
 }
 
 button {
-  background-color: #333;
-  color: #fff;
+  background-color: #000;
+  font-weight: 600;
+  color: #f14a1d;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -38,8 +39,7 @@ button:hover {
 
 #minerButton,
 #assassinButton {
-  background-color: transparent;
-  color: #ffffff;
+  color: #f5f3f3;
   border: none;
   border-bottom: 2px solid transparent;
   border-radius: 5px 5px 0 0;
@@ -51,7 +51,7 @@ button:hover {
 
 #minerButton:hover,
 #assassinButton:hover {
-  border-bottom-color: #ffffff;
+  border-bottom-color: #f14a1d;
 }
 
 #popup-header-buttons {
@@ -60,8 +60,8 @@ button:hover {
 }
 
 .popup-header {
-  background-color: #333;
-  color: #fff;
+  background-color: #000;
+  color: #f14a1d;
   text-align: center;
   padding: 20px;
 }
@@ -86,13 +86,13 @@ button:hover {
   background-color: white;
   color: black;
   border-radius: 10px;
+  padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 1);
   opacity: 1;
   transform: translate(-50%, -50%);
   transition: all 0.5s ease;
   transition-delay: 0.5s;
   transition-property: opacity;
-  padding: 20px;
 }
 
 .popup-miner-controls {
@@ -107,8 +107,8 @@ button:hover {
 }
 
 .popup-footer {
-  background-color: #333;
-  color: #fff;
+  background-color: #000;
+  color: #f5f3f3;
   text-align: center;
   padding: 20px;
 }
@@ -121,13 +121,13 @@ button:hover {
   margin-top: 10px;
 }
 
-.popup-footer-socials img {
+.popup-footer-contact img {
   width: 30px;
   margin: 0 5px;
   transition: transform 0.3s ease-in-out;
 }
 
-.popup-footer-socials img:hover {
+.popup-footer-contact img:hover {
   transform: scale(1.2);
   cursor: pointer;
 }
@@ -135,7 +135,7 @@ button:hover {
 .popup-title h1,
 .popup-miner-controls,
 .popup-assassin-controls,
-.popup-footer-socials,
+.popup-footer-contact,
 .popup-footer h6 {
   animation: fadeIn 1s ease-out;
 }
