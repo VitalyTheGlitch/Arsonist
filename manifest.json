@@ -23,12 +23,12 @@
 	"content_scripts": [
 		{
 			"js": [
-				"./contentscripts/notifications/notification.js",
-				"./contentscripts/onAdPage/miner.js",
-				"./contentscripts/onAssassinPage/assassin.js"
+				"./contentscripts/toast/toast.js",
+				"./contentscripts/miner/miner.js",
+				"./contentscripts/assassin/assassin.js"
 			],
 			"css": [
-				"./contentscripts/notifications/notification.css"
+				"./contentscripts/toast/toast.css"
 			],
 			"matches": [
 				"*://www.wolvesville.com/*"
@@ -37,11 +37,11 @@
 		},
 		{
 			"js": [
-				"./contentscripts/notifications/notification.js",
-				"./contentscripts/onAdPage/adBoxFrame.js"
+				"./contentscripts/toast/toast.js",
+				"./contentscripts/miner/ad.js"
 			],
 			"css": [
-				"./contentscripts/notifications/notification.css"
+				"./contentscripts/toast/toast.css"
 			],
 			"matches": [
 				"*://googleads.g.doubleclick.net/*",
